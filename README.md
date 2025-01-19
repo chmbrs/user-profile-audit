@@ -23,13 +23,10 @@ This project is built using Python's **FastAPI**, PostgreSQL, and follows the **
 The project follows a layered architecture for scalability and maintainability:  
 
     user-profile-audit/
-        ├── app/ 
-        │ ├── api/ # API route handlers 
-        │ ├── core/ # Core logic (auth, config)    
+        ├── app/
         │ ├── db/ # Database operations and migrations 
-        │ ├── models/ # Pydantic models for validation 
-        │ ├── services/ # Business logic 
-        │ └── main.py # Application entry point 
+        │ ├── models/ # Pydantic models for validation
+        │ └── main.py # Application entry point and endpoint managment
         ├── tests/ # Test suite 
         ├── Dockerfile # Docker configuration 
         ├── kubernetes/ # Kubernetes manifests 
@@ -93,7 +90,7 @@ SECRET_KEY=<your_secret_key>
 uvicorn app.main:app --reload --env-file .env
 ```
 
-**documentation:** http://127.0.0.1:8000/docs
+**DOCUMENTATION:** http://localhost/docs
 
 ### **Endpoints**
 
@@ -142,16 +139,14 @@ pytest --cov=app
 ## **Development Roadmap**
 
 ### **Milestone 1: Project Setup**
-Define folder structure and initialize project.
+Folder structure and initialize project.
 Git flow init.
 
 ### **Milestone 2: CRUD Operations**
-Implement user CRUD endpoints with SQL-based operations.
-
+User CRUD endpoints with SQL-based operations.
 
 ### **Milestone 3: Audit Logging and Restoration**
-Add audit logging and point-in-time restoration.
-
+Audit logging and point-in-time restoration.
 
 ### **Milestone 4: Authentication and Deployment**
 Secure endpoints with Basic Authentication and prepare Kubernetes configurations.
@@ -159,6 +154,8 @@ Secure endpoints with Basic Authentication and prepare Kubernetes configurations
 
 ### **Time Taken**
 Milestone 1 = 1 hour
+Milestone 2 = 3 hours
+Milestone 3 = 2 hour
 
 
 #### **Contact**

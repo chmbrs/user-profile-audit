@@ -27,7 +27,10 @@ pytest==8.3.4
     #   -c requirements.txt
     #   -r dev-requirements.in
     #   pytest-cov
+    #   pytest-mock
 pytest-cov==6.0.0
+    # via -r dev-requirements.in
+pytest-mock==3.14.0
     # via -r dev-requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:

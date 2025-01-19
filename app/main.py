@@ -2,7 +2,7 @@ from fastapi import FastAPI, status, HTTPException, Depends
 from contextlib import asynccontextmanager
 
 from app.models.user import UserData
-from app.db.operations import Database
+from app.db.db_funcs import Database
 
 db = Database()
 
@@ -59,3 +59,22 @@ async def delete_user(user_id: int, db: Database = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return {"message": "User deleted successfully", "user": user}
+
+@app.get("/audit")
+async def get_audit_logs(db: Database = Depends(get_db)):
+    logs = await db.get_audit_logs()
+    return {"audit_logs": logs}
+
+@app.post("/users/{user_id}/restore")
+async def restore_user(user_id: int, version: int, db: Database = Depends(get_db)):
+    audit_log = await db.get_user_audit_restore_version(user_id, version)
+    if not audit_log:
+        raise HTTPException(status_code=404, detail="Version not found for restoration.")
+
+    restored_user = await db.restore_user(user_id, audit_log["name"], audit_log["email"], audit_log["deleted"])
+    if not restored_user:
+        raise HTTPException(status_code=404, detail="User not found for restoration.")
+
+    await db.log_audit(user_id, "RESTORE", audit_log["name"], audit_log["email"])
+
+    return {"restored_user": restored_user}

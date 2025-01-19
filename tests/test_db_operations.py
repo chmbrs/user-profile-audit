@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import patch, AsyncMock
 
-from app.db.operations import Database
+from app.db.db_funcs import Database
 
 # This test needs the actual connection with the db to function and to have a user in it
 #async def test_create_user():
