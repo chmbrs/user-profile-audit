@@ -40,14 +40,14 @@ The project follows a layered architecture for scalability and maintainability:
 
 ## **Setup Instructions**  
 ### **Prerequisites**  
-- Python 3.9 or higher  
+- Python 3.12 or higher  
 - PostgreSQL  
 - Docker (optional, for containerized setup)  
 
 ### **Installation**  
 1. Clone the repository:  
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/chmbrs/user-profile-audit.git
    cd user-profile-audit
    ```
 

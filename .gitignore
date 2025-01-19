@@ -47,3 +47,6 @@ htmlcov/
 # Other
 .DS_Store
 Thumbs.db
+
+#pip-compile
+*.in
