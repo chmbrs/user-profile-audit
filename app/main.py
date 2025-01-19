@@ -1,12 +1,27 @@
 from fastapi import FastAPI, status
-from pydantic import BaseModel
 from fastapi.responses import JSONResponse
+from contextlib import asynccontextmanager
 
-class UserData(BaseModel):
-    name: str
-    email: str
+from app.models.user import UserData
+from app.db.main import Database
 
-app = FastAPI()
+db = Database()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup actions
+    await db.connect()
+    yield
+    # Shutdown actions
+    await db.disconnect()
+
+app = FastAPI(lifespan=lifespan)
+
+# Placeholder routes for testing
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
 
 @app.post("/users", status_code=status.HTTP_201_CREATED)
 async def create_user(user_data: UserData):

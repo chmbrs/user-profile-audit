@@ -10,14 +10,20 @@ anyio==4.8.0
     # via
     #   httpx
     #   starlette
+asyncpg==0.30.0
+    # via -r requirements.in
 certifi==2024.12.14
     # via
     #   httpcore
     #   httpx
+click==8.1.8
+    # via uvicorn
 fastapi==0.115.6
     # via -r requirements.in
 h11==0.14.0
-    # via httpcore
+    # via
+    #   httpcore
+    #   uvicorn
 httpcore==1.0.7
     # via httpx
 httpx==0.28.1
@@ -30,6 +36,8 @@ pydantic==2.10.5
     # via fastapi
 pydantic-core==2.27.2
     # via pydantic
+python-dotenv==1.0.1
+    # via -r requirements.in
 sniffio==1.3.1
     # via anyio
 starlette==0.41.3
@@ -40,3 +48,5 @@ typing-extensions==4.12.2
     #   fastapi
     #   pydantic
     #   pydantic-core
+uvicorn==0.34.0
+    # via -r requirements.in

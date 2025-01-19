@@ -1,5 +1,7 @@
 # User Profile Audit System  
 
+![coverage.svg](static/coverage.svg)
+
 ## **Overview**  
 The **User Profile Audit System** is a backend application designed to manage user profiles and ensure no data is permanently lost. All changes, deletions, and updates to user profiles are logged and auditable, with the ability to restore user profiles to a previous state.  
 
@@ -64,6 +66,12 @@ The project follows a layered architecture for scalability and maintainability:
     ```bash
     pip install -r requirements.txt
     ```
+   
+   or using pip-tool:
+   ```bash
+   pip install pip-tool
+   pip-sync requirements.txt dev-requirements.txt
+   ```
 
 3. Set up environment variables in a .env file:
 ```dotenv
@@ -82,7 +90,7 @@ SECRET_KEY=<your_secret_key>
 ### **Run the Application**
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --env-file .env
 ```
 
 ### **Endpoints**
@@ -90,6 +98,8 @@ uvicorn app.main:app --reload
 1. User CRUD Operations
 
 - `POST /users`: Create a new user.
+
+- `GET /users/{id}`: Get a user.
 
 - `GET /users`: List all users.
 
