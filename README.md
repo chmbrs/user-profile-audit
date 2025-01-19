@@ -93,6 +93,8 @@ SECRET_KEY=<your_secret_key>
 uvicorn app.main:app --reload --env-file .env
 ```
 
+**documentation:** http://127.0.0.1:8000/docs
+
 ### **Endpoints**
 
 1. User CRUD Operations
