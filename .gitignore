@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
+*.egg
+*.egg-info/
+dist/
+build/
+*.so
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+
+# PyCharm
+.idea/*
+*.iml
+*.ipr
+*.iws
+
+# Logs
+logs/
+*.log
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+# Environment files
+.env
+.env.*
+
+# Docker
+*.env.docker
+**/.dockerignore
+
+# Kubernetes
+*.kubeconfig
+
+# Other
+.DS_Store
+Thumbs.db
