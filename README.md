@@ -91,7 +91,7 @@ SECRET_KEY=<your_secret_key>
 uvicorn app.main:app --reload --env-file .env
 ```
 
-**DOCUMENTATION:** http://localhost/docs
+**DOCUMENTATION**:  `/docs` -> example: http://localhost/docs
 
 ### **Endpoints**
 0. Health Check
@@ -134,20 +134,22 @@ coverage-badge -fo static/coverage.svg
 
 1. Build and run the Docker container:
     ```bash
-    docker build -t user-profile-audit .  
-    docker run -p 8000:8000 --env-file .env user-profile-audit  
+      docker build -t user-profile-audit .
+      
+      docker run -p 8000:8000 user-profile-audit
     ```
 
 ### **Kubernetes**
 1. Apply Kubernetes manifests:
     ```bash
-    kubectl apply -f kubernetes/
+    kubectl apply -f k8s/deployment.yaml
+    kubectl apply -f k8s/service.yaml
     ```
 ---
 ## **Development Roadmap**
 
 ### **Milestone 1: Project Setup**
-Folder structure and initialize project.
+Folder structure and initialize project.\
 Git flow init.
 
 ### **Milestone 2: CRUD Operations**
@@ -157,13 +159,16 @@ User CRUD endpoints with SQL-based operations.
 Audit logging and point-in-time restoration.
 
 ### **Milestone 4: Authentication and Deployment**
-Secure endpoints with Basic Authentication and prepare Kubernetes configurations.
+Secure endpoints with Basic Authentication.\
+Prepare Docker and Kubernetes configurations.
 
 
 ### **Time Taken**
-Milestone 1 = 1 hour
-Milestone 2 = 3 hours
-Milestone 3 = 2.5 hour
+Milestone 1 = 1 hour\
+Milestone 2 = 3 hours\
+Milestone 3 = 2.5 hour\
+Milestone 4 = 1.5 hour\
+**Total** = 8 hours
 
 #### **Contact**
 For any questions, reach out to juanjosechambers@gmail.com

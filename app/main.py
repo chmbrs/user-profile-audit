@@ -1,6 +1,10 @@
 from fastapi import FastAPI, status, HTTPException, Depends
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from contextlib import asynccontextmanager
 
+from httpx import Request
+
+import config
 from app.models.user import UserData
 from app.db.db_funcs import Database
 
@@ -9,15 +13,51 @@ db = Database()
 @asynccontextmanager
 async def lifespan(app: FastAPI): # pragma: no cover
     await db.connect()
+    customize_openapi(app)
     try:
         yield
     finally:
         await db.disconnect()
 
 app = FastAPI(lifespan=lifespan)
+security = HTTPBasic()
 
 async def get_db(): # pragma: no cover
     return db
+
+def verify_credentials(credentials: HTTPBasicCredentials):
+    valid_username = config.VALID_USER_NAME
+    valid_password = config.VALID_PASSWORD
+    if credentials.username != valid_username or credentials.password != valid_password:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid credentials",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+
+def customize_openapi(app: FastAPI):
+    """Customize OpenAPI schema to include BasicAuth security scheme."""
+    if app.openapi_schema:
+        return
+
+    openapi_schema = app.openapi()
+    openapi_schema["components"]["securitySchemes"] = {
+        "BasicAuth": {
+            "type": "http",
+            "scheme": "basic",
+        }
+    }
+    for path in openapi_schema["paths"].values():
+        for method in path.values():
+            method.setdefault("security", [{"BasicAuth": []}])
+    app.openapi_schema = openapi_schema
+
+@app.middleware("http")
+async def auth_middleware(request: Request, call_next):
+    if request.url.path not in ["/docs", "/openapi.json"]:  # Exclude Swagger docs
+        credentials = await security(request)
+        verify_credentials(credentials)
+    return await call_next(request)
 
 @app.get("/health")
 async def health_check(): # pragma: no cover
