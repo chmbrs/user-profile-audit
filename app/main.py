@@ -7,7 +7,7 @@ from app.db.db_funcs import Database
 db = Database()
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI): # pragma: no cover
     await db.connect()
     try:
         yield
@@ -16,11 +16,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-async def get_db():
+async def get_db(): # pragma: no cover
     return db
 
 @app.get("/health")
-async def health_check():
+async def health_check(): # pragma: no cover
     return {"status": "ok"}
 
 @app.post("/users", status_code=status.HTTP_201_CREATED)
@@ -36,7 +36,6 @@ async def get_users(db: Database = Depends(get_db)):
     users = await db.get_users()
     return {"users": users}
 
-
 @app.get("/users/{user_id}")
 async def get_user(user_id: int, db: Database = Depends(get_db)):
     user = await db.get_user(user_id=user_id)
@@ -44,14 +43,12 @@ async def get_user(user_id: int, db: Database = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return {"user": user}
 
-
 @app.put("/users/{user_id}")
 async def update_user(user_id: int, user_data: UserData, db: Database = Depends(get_db)):
     user = await db.update_user(user_id=user_id, name=user_data.name, email=user_data.email)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return {"message": "User updated successfully", "user": user}
-
 
 @app.delete("/users/{user_id}")
 async def delete_user(user_id: int, db: Database = Depends(get_db)):

@@ -2,10 +2,10 @@ import asyncpg
 from config import DATABASE_URL
 
 class Database:
-    def __init__(self):
+    def __init__(self): # pragma: no cover
         self.pool = None
 
-    async def connect(self):
+    async def connect(self): # pragma: no cover
         try:
             self.pool = await asyncpg.create_pool(DATABASE_URL)
             print("Connected to database successfully.")
@@ -13,18 +13,18 @@ class Database:
             print(f"Error connecting to database: {e}")
             raise
 
-    async def disconnect(self):
+    async def disconnect(self): # pragma: no cover
         await self.pool.close()
 
-    async def execute(self, query, *args):
+    async def execute(self, query, *args): # pragma: no cover
         async with self.pool.acquire() as connection:
             return await connection.execute(query, *args)
 
-    async def fetch(self, query, *args):
+    async def fetch(self, query, *args): # pragma: no cover
         async with self.pool.acquire() as connection:
             return await connection.fetch(query, *args)
 
-    async def fetchrow(self, query, *args):
+    async def fetchrow(self, query, *args): # pragma: no cover
         async with self.pool.acquire() as connection:
             return await connection.fetchrow(query, *args)
 

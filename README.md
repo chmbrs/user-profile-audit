@@ -94,6 +94,8 @@ uvicorn app.main:app --reload --env-file .env
 **DOCUMENTATION:** http://localhost/docs
 
 ### **Endpoints**
+0. Health Check
+- `GET /health`: Helpful to test the DB connection.
 
 1. User CRUD Operations
 
@@ -113,13 +115,18 @@ uvicorn app.main:app --reload --env-file .env
 
 3. Restore User
 
-- `POST /restore/{id}`: Restore a user to a specific point in time.
+- `POST /restore/{id}`: Restore a user to a specific version.
 
 ## **Testing**
 Run tests using pytest:
 
 ```bash
 pytest --cov=app
+```
+### **Update the coverage badge**
+
+```bash
+coverage-badge -fo static/coverage.svg
 ```
 
 ## **Deployment**
