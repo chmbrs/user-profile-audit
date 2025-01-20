@@ -10,6 +10,7 @@ This project is built using Python's **FastAPI**, PostgreSQL, and follows the **
 ---
 
 ## **Features**  
+- **Swagger API Documentation**
 - **User CRUD Operations**: Create, Read, Update, and Delete user profiles.  
 - **Audit Logging**: Tracks all changes to user profiles.  
 - **Point-in-Time Restoration**: Restore a user profile to a specific historical state.  
@@ -78,7 +79,7 @@ SECRET_KEY=<your_secret_key>
 
 4. Initialize the database:
     ```bash
-    python app/db/initialize_db.py
+    python scripts/initialize_db.py
     ```
 ---
 
@@ -155,8 +156,7 @@ Secure endpoints with Basic Authentication and prepare Kubernetes configurations
 ### **Time Taken**
 Milestone 1 = 1 hour
 Milestone 2 = 3 hours
-Milestone 3 = 2 hour
-
+Milestone 3 = 2.5 hour
 
 #### **Contact**
 For any questions, reach out to juanjosechambers@gmail.com

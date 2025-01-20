@@ -92,4 +92,9 @@ class Database:
             WHERE id = $1
             RETURNING id, name, email;
         """
-        return await self.fetchrow(restore_query, user_id, name, email, deleted)
+        restored_user =  await self.fetchrow(restore_query, user_id, name, email, deleted)
+
+        if restored_user:
+            await self.log_audit(user_id, "RESTORE", deleted, name, email)
+
+        return  restored_user

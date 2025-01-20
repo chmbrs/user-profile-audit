@@ -27,7 +27,7 @@ async def health_check():
 async def create_user(user_data: UserData, db: Database = Depends(get_db)):
     try:
         user = await db.create_user(name=user_data.name, email=user_data.email)
-        return {"message": "User created successfully", "id": user}
+        return {"message": "User created successfully", "user": user}
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error creating user: {str(e)}")
 
@@ -74,7 +74,5 @@ async def restore_user(user_id: int, version: int, db: Database = Depends(get_db
     restored_user = await db.restore_user(user_id, audit_log["name"], audit_log["email"], audit_log["deleted"])
     if not restored_user:
         raise HTTPException(status_code=404, detail="User not found for restoration.")
-
-    await db.log_audit(user_id, "RESTORE", audit_log["name"], audit_log["email"])
 
     return {"restored_user": restored_user}

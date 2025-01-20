@@ -4,6 +4,7 @@ from fastapi.testclient import TestClient
 from fastapi import status
 
 from app.main import app, Database
+
 client = TestClient(app)
 
 @pytest.fixture
@@ -93,8 +94,8 @@ async def test_create_user_success(sample_user, mock_create_user):
     response = client.post("/users", json=sample_user)
 
     assert response.status_code == status.HTTP_201_CREATED
-    assert response.json()["name"] == sample_user["name"]
-    assert response.json()["email"] == sample_user["email"]
+    assert response.json()["user"]["name"] == sample_user["name"]
+    assert response.json()["user"]["email"] == sample_user["email"]
 
     mock_create_user.assert_called_once_with(name=sample_user["name"], email=sample_user["email"])
 
