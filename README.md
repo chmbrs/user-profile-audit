@@ -25,13 +25,18 @@ The project follows a layered architecture for scalability and maintainability:
 
     user-profile-audit/
         ├── app/
+        │ ├── api/ # FastAPI route handlers
+        │ ├── core/ # Core application logic
         │ ├── db/ # Database operations and migrations 
         │ ├── models/ # Pydantic models for validation
         │ └── main.py # Application entry point and endpoint managment
+        ├── k8s/ # Kubernetes manifests 
+        ├── static/ # Static files like images 
         ├── tests/ # Test suite 
+        ├── .env-example # Environment variables example
+        ├── dev-requirements.txt # Python dev dependencies
         ├── Dockerfile # Docker configuration 
-        ├── kubernetes/ # Kubernetes manifests 
-        ├── .env # Environment variables 
+        ├── LICENCE # MIT LICENCE
         ├── README.md # Project documentation 
         └── requirements.txt # Python dependencies
 
@@ -79,7 +84,7 @@ SECRET_KEY=<your_secret_key>
 
 4. Initialize the database:
     ```bash
-    python scripts/initialize_db.py
+    python app/db/initialize_db.py
     ```
 ---
 
@@ -150,6 +155,7 @@ coverage-badge -fo static/coverage.svg
 
 ### **Milestone 1: Project Setup**
 Folder structure and initialize project.\
+RDD init.\
 Git flow init.
 
 ### **Milestone 2: CRUD Operations**

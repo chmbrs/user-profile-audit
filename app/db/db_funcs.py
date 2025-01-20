@@ -1,5 +1,5 @@
 import asyncpg
-from config import DATABASE_URL
+from app.core.config import DATABASE_URL
 
 class Database:
     def __init__(self): # pragma: no cover
@@ -66,7 +66,8 @@ class Database:
         return user
 
     async def delete_user(self, user_id: int):
-        query = "UPDATE users SET deleted = true WHERE id = $1 RETURNING id, name, email, deleted;"
+        deleted_unique_string = f'deleted_{user_id}'
+        query = f"UPDATE users SET email = '{deleted_unique_string}', deleted = true WHERE id = $1 RETURNING id, name, email, deleted;"
         user = await self.fetchrow(query, user_id)
         if user:
             await self.log_audit(user_id, "DELETE", True, user['name'], user['email'])

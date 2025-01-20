@@ -3,7 +3,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 from fastapi import status
 
-from app.main import app, Database
+from app.main3 import app, Database
 
 client = TestClient(app)
 

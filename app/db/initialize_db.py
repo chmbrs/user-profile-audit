@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS user_audit (
 );
 """
 
-async def init_db():
+async def init_db():  # pragma: no cover
     pool = await create_pool(DATABASE_URL)
     async with pool.acquire() as conn:
         print("Initializing the database...")
