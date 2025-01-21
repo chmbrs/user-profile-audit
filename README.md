@@ -182,5 +182,16 @@ Milestone 3 = 2.5 hour\
 Milestone 4 = 1.5 hour\
 **Total** = 8 hours
 
+
+#### 🙏 **Thank You**
+
+This project would not have been possible without the incredible efforts and contributions from a variety of individuals and communities.
+
+    Open Source Codes - Projects, Frameworks, Libs and Documentation
+    Feedback Providers - Family, Friends, Company who gave me the case to solve
+    Supportive Communities - Forums, QAs, Stackoverflow, etc.
+    Tools
+
+
 #### **Contact**
 For any questions, reach out to juanjosechambers@gmail.com
