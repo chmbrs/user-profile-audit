@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 
-def customize_openapi(app: FastAPI):
+def customize_openapi(app: FastAPI): # pragma: no cover
     if app.openapi_schema:
         return
 

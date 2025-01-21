@@ -120,7 +120,8 @@ uvicorn app.main:app --reload --env-file .env
 
 3. Restore User
 
-- `POST /restore/{id}`: Restore a user to a specific version.
+- `POST /restore/{userId}&{version}`: Restore a user to a specific version.
+
 
 ## **Testing**
 Run tests using pytest:
