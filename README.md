@@ -58,16 +58,21 @@ The project follows a layered architecture for scalability and maintainability:
 
     1.1 (Optional recommended) 
     Use a virtual environment to manage python dependencies.
-
     ```bash
      python3 -m venv .venv
      source .venv/bin/activate
     ```
 
 
-2. Install dependencies:
-    ```bash
+2. Install dependencies:\
+
+   ```bash
     pip install -r requirements.txt
+    ```
+   
+   (for dev and local testing)    
+   ```bash
+    pip install -r dev-requirements.txt
     ```
    
    or using pip-tool:
@@ -77,10 +82,11 @@ The project follows a layered architecture for scalability and maintainability:
    ```
 
 3. Set up environment variables in a .env file:
-```dotenv
-DATABASE_URL=postgresql://<username>:<password>@localhost:5432/user_audit
-SECRET_KEY=<your_secret_key>
-```
+   ```dotenv
+   DATABASE_URL=postgresql://<username>:<password>@localhost:5432/user_audit
+   USER_NAME=<your_admin_user_name>
+   PASSWORD=<your_admin_password>
+   ```
 
 4. Initialize the database:
     ```bash
@@ -92,9 +98,9 @@ SECRET_KEY=<your_secret_key>
 
 ### **Run the Application**
 
-```bash
-uvicorn app.main:app --reload --env-file .env
-```
+   ```bash
+   uvicorn app.main:app --reload --env-file .env
+   ```
 
 **DOCUMENTATION**:  `/docs` -> example: http://localhost/docs
 
@@ -141,7 +147,6 @@ coverage-badge -fo static/coverage.svg
 1. Build and run the Docker container:
     ```bash
       docker build -t user-profile-audit .
-      
       docker run -p 8000:8000 user-profile-audit
     ```
 
